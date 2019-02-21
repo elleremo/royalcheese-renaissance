@@ -1,9 +1,15 @@
 <?php
-require_once( get_theme_file_path("autoloder/Autoloader.php" ));
+require_once( get_theme_file_path( "autoloder/Autoloader.php" ) );
 
 use Royalcheese\Autoloader;
 
-new Autoloader( __FILE__, 'RoyalCheese' );
+try {
+	new Autoloader( __FILE__, 'RoyalCheese' );
+} catch ( Exception $e ) {
+	if ( function_exists( 'd' ) ) {
+		d( $e->getMessage() );
+	}
+}
 
 
 class RoyalCheese {
@@ -17,8 +23,12 @@ class RoyalCheese {
 
 	public static function run() {
 
+		new \RoyalCheese\Main\Favicon();
+
+		new \RoyalCheese\Main\Viewport();
+
 		self::service();
-		self::helpers();
+
 		add_action( 'after_setup_theme', [ __CLASS__, 'after_setup_theme' ], 10 );
 
 		add_filter( 'excerpt_more', function ( $more ) {
@@ -29,19 +39,12 @@ class RoyalCheese {
 			return 36;
 		}, 10, 1 );
 
-		add_action( 'wp_head', [ __CLASS__, 'favicon' ] );
-		add_action( 'login_head', [ __CLASS__, 'favicon' ] );
-		add_action( 'admin_head', [ __CLASS__, 'favicon' ] );
-
 	}
 
 	public static function after_setup_theme() {
-		add_filter( 'body_class', [ __CLASS__, 'body_class' ] );
-		add_action( 'wp_head', [ __CLASS__, 'add_viewport' ], 0 );
 		add_action( 'wp_enqueue_scripts', [ __CLASS__, 'enqueue_scripts' ] );
 		add_action( 'template_redirect', [ __CLASS__, 'add_chunks' ] );
 	}
-
 
 	public static function add_chunks() {
 
@@ -158,12 +161,6 @@ class RoyalCheese {
 
 	}
 
-
-	public static function helpers() {
-
-
-	}
-
 	public static function service() {
 		add_editor_style();
 
@@ -190,60 +187,11 @@ class RoyalCheese {
 		);
 	}
 
-	public static function add_viewport() {
-		echo "<meta name='viewport' content='width=device-width, initial-scale=1,maximum-scale=1.0,user-scalable=no'> \r\n";
-	}
-
-	public static function body_class( $classes ) {
-
-		if ( is_singular() ) {
-			$classes[] = 'singular';
-			if ( get_post_meta( $GLOBALS['wp_query']->queried_object_id, '_advert_post', true ) == 'on' ) {
-				$classes[] = 'singular-advert-post';
-			}
-
-			if ( is_user_logged_in() ) {
-				if ( get_user_meta( get_current_user_id(), 'wooden_bg', true ) ) {
-					$classes[] = 'wooden_bg';
-				}
-			}
 
 
-		}
-
-		if ( is_home() ) {
-			$classes[] = 'grid';
-		}
-
-		return $classes;
-	}
-
-
-	public static function favicon() {
-
-		echo '<link rel="icon" type="image/x-icon" href="' . get_bloginfo( 'stylesheet_directory' ) . '/images/favicons/favicon.ico" />' . "\n";
-
-		echo '<link rel="shortcut icon" href="' . get_bloginfo( 'stylesheet_directory' ) . '/images/favicons/favicon.ico" type="image/x-icon">' . "\n";
-
-		if ( function_exists( 'get_site_icon_url' ) ) {
-
-			echo sprintf( '<link rel="apple-touch-icon-precomposed" href="%s">', esc_url( get_site_icon_url( 180 ) ) ) . "\n";
-
-			echo sprintf( '<link rel="apple-touch-icon-precomposed" sizes= "76x76" href="%s">', esc_url( get_site_icon_url( 76 ) ) ) . "\n";
-
-			echo sprintf( '<link rel="apple-touch-icon-precomposed" sizes="120x120" href="%s">', esc_url( get_site_icon_url( 120 ) ) ) . "\n";
-
-			echo sprintf( '<link rel="apple-touch-icon-precomposed" sizes="152x152" href="%s">', esc_url( get_site_icon_url( 152 ) ) ) . "\n";
-
-			echo sprintf( '<meta name="msapplication-TileImage" content="%s">', esc_url( get_site_icon_url( 270 ) ) ) . "\n";
-		}
-		echo '<meta name="msapplication-TileColor" content="#efefef">';
-
-		echo '<meta name="theme-color" content="#ffffff">';
-
-	}
 
 }
+
 RoyalCheese::run();
 
 

@@ -37,6 +37,8 @@ class Autoloader {
 	/**
 	 * @param string $dir
 	 * @param mixed $space
+	 *
+	 * @throws \Exception
 	 */
 	function addNamespaceObject( $dir, $space = false, $path = false ) {
 		$s = DIRECTORY_SEPARATOR;
