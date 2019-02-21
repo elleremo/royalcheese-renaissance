@@ -1,9 +1,6 @@
 <?php
-/**
- * User: vladimir rambo petrozavodsky
- */
 
-class Royalcheese {
+class RoyalCheese {
 	public static $version = '1.0.0';
 
 	private function __clone() {
@@ -242,4 +239,4 @@ class Royalcheese {
 
 }
 
-Royalcheese::run();
+RoyalCheese::run();
