@@ -1,4 +1,10 @@
 <?php
+require_once( get_theme_file_path("autoloder/Autoloader.php" ));
+
+use Royalcheese\Autoloader;
+
+new Autoloader( __FILE__, 'RoyalCheese' );
+
 
 class RoyalCheese {
 	public static $version = '1.0.0';
@@ -153,7 +159,7 @@ class RoyalCheese {
 	}
 
 
- 	public static function helpers() {
+	public static function helpers() {
 
 
 	}
@@ -238,5 +244,6 @@ class RoyalCheese {
 	}
 
 }
-
 RoyalCheese::run();
+
+
