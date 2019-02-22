@@ -1,18 +1,5 @@
 <?php
 
-require_once( get_theme_file_path( "autoloder/Autoloader.php" ) );
-
-use Royalcheese\Autoloader;
-
-try {
-	new Autoloader( __FILE__, 'RoyalCheese' );
-} catch ( Exception $e ) {
-	if ( function_exists( 'd' ) ) {
-		d( $e->getMessage() );
-	}
-}
-
-
 class RoyalCheese {
 	public static $version = '1.0.0';
 
@@ -25,7 +12,7 @@ class RoyalCheese {
 	public static function run() {
 
 		new \RoyalCheese\Main\Favicon();
-//		new \RoyalCheese\Main\Viewport();
+		new \RoyalCheese\Main\Viewport();
 
 		self::service();
 
@@ -168,3 +155,15 @@ class RoyalCheese {
 
 
 RoyalCheese::run();
+
+require_once( get_theme_file_path( "autoloder/Autoloader.php" ) );
+
+use Royalcheese\Autoloader;
+
+try {
+	new Autoloader( __FILE__, 'RoyalCheese' );
+} catch ( Exception $e ) {
+	if ( function_exists( 'd' ) ) {
+		d( $e->getMessage() );
+	}
+}
