@@ -38,13 +38,14 @@ class Autoloader {
 	 * @param string $dir
 	 * @param mixed $space
 	 *
-	 * @throws \Exception
+	 * @param bool $path
 	 */
 	function addNamespaceObject( $dir, $space = false, $path = false ) {
 		$s = DIRECTORY_SEPARATOR;
 		if ( ! $space ) {
 			$space = $this->space;
 		}
+
 		if ( ! $path ) {
 			$path = "src";
 		}

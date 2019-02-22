@@ -3,7 +3,7 @@
  * User: vladimir rambo petrozavodsky
  */
 
-namespace RoyalCheese\Royalcheese\Main;
+namespace RoyalCheese\Main;
 
 
 class bodyClass {
