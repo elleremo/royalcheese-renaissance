@@ -6,7 +6,6 @@ namespace RoyalCheese\Main;
 class Favicon {
 
 	public function __construct() {
-		d($this);
 		add_action( 'wp_head', [ $this, 'favicon' ] );
 		add_action( 'login_head', [ $this, 'favicon' ] );
 		add_action( 'admin_head', [ $this, 'favicon' ] );

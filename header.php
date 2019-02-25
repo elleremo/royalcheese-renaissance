@@ -24,4 +24,5 @@
 
 			</div>
 		</header>
+
 <?php do_action('Royalcheese__theme-header-after');?>
